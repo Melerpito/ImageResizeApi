@@ -12,6 +12,6 @@ namespace ImageResize.Data
         public ImageResizeDbContext(DbContextOptions<ImageResizeDbContext> options) : base(options) { }
 
         //tabella contenete i metadati delle immagini memorizzate
-        public DbSet<Image> Images { get; set; }
+        public DbSet<Figure> Figures { get; set; }
     }
 }
