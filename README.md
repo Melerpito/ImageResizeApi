@@ -36,4 +36,7 @@ Per poter impelementare una HTTP API per poter garantire a chiunque
 ##	System.ComponentModel.DataAnnotations.Schema;
 Per poter utilizzare la parola chiave NotMapped all'interno della classe Image,
 permette di NON memorizzare l'immagine all'interno del database
+##	Microsoft.EntityFrameworkCore
+Per poter utilizzare la classe DbContext che permette la realizzazione di un
+database applicando il concetto di code first approach
 		
