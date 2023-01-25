@@ -12,8 +12,8 @@ namespace ImageResize.Models
         public int Width { get; set; }              //Larghezza
         public int Height { get; set; }             //Altezza
 
-        [Required]
+        //[Required]
         [NotMapped]
-        public FormFile? realFigure { get; set; }   //Contiene l'immagine, non e' memorizzato nel database
+        public IFormFile? realFigure { get; set; }   //Contiene l'immagine, non e' memorizzato nel database
     }
 }

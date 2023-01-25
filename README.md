@@ -1,8 +1,12 @@
 # API Endpoints
 ## UploadImage()
-## ListImage()
+	permette l'inserimento di una nuova immagine
+## ListImages()
+	restituisce le immagini memorizzate
 ## DeleteImage()
+	elimina una specifica immagine
 ## ResizeImage()
+	modifica le dimensioni di una immagine
 
 # Piccola spiegazione dell'architettura del progetto
 Per poter impelementare una HTTP API per poter garantire a chiunque

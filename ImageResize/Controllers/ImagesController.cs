@@ -56,10 +56,27 @@ namespace ImageResize.Controllers
             return StatusCode(StatusCodes.Status201Created);
         }
 
+        //summary:  restituisce i nomi delle immagini memorizzate
+        //              in ordine alfabetico
+        //returns:
+        //          - NotFound() se non esistono immagini;
+        //          - Ok(imagesList) altrimenti.
         [HttpGet]
-        public IActionResult ListImage()
+        public IActionResult ListImages()
         {
-            return Ok();
+            //crea la lista delle immagini da restituire
+            var imagesList =
+            (
+                from images in _dbContext.Images
+                orderby images.Name
+                select images.Name
+            );
+
+            //controllo se esistono immagini
+            if(imagesList == null)
+                return NotFound("Nessuna immagine");
+
+            return Ok(imagesList);
         }
 
         [HttpDelete("{name}")]
