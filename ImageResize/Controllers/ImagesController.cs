@@ -16,7 +16,7 @@ namespace ImageResize.Controllers
         //  201: se l'immagine e' stata caricata con successo
         [HttpPost]
         public IActionResult UploadImage([FromForm] Image imageIn)
-        {
+        {   
             return StatusCode(StatusCodes.Status201Created);
         }
 
