@@ -8,17 +8,22 @@
 Per poter impelementare una HTTP API per poter garantire a chiunque
 	di caricare/eliminare/modificare immagini è necessario avere:
 	
-	Tabella Images:
+###	Tabella Images:
 		Descrizione: Contiene i metadata relativi a una immagine
-		Attributi:
-			- Id: 		Chiave identificativa dell'immagine;
-			- Name: 	Assegnato durante il caricamento,
-					Non possono sussistere nomi equivalenti*
-			- ImageURL: 	Contiene il path dell'immagine;
-			- Width:	Larghezza dell'immagine;
-			- Height:	Altezza dell'immagine.
+####		Attributi:
+#####			Id: 		
+			 	Chiave identificativa dell'immagine;
+##### 			Name: 		
+			 	Assegnato durante il caricamento,
+				Non possono sussistere nomi equivalenti*
+#####			ImageURL: 	
+			 	Contiene il path dell'immagine;
+#####			Width:		
+			 	Larghezza dell'immagine;
+#####			Height:	
+			 	Altezza dell'immagine.
 
-		*Se possono sussistere piu' nomi equivalenti:
+######		*Se possono sussistere piu' nomi equivalenti:
 			1) Non sarebbe possibile determinare quale immagine 
 				restituire al momento della ricerca;
 			2) Potrei implementare un attributo NomeReale 
@@ -27,16 +32,18 @@ Per poter impelementare una HTTP API per poter garantire a chiunque
 				per la gestione degli utenti.
 
 		
-	Cartella wwwroot:
+###	Cartella wwwroot:
 		Contenitore delle immagini.
 		Non memorizzo le immagini all'interno del database per motivi
 			prestazionali.
 
 # Librearie Aggiunte
 ##	System.ComponentModel.DataAnnotations.Schema;
-Per poter utilizzare la parola chiave NotMapped all'interno della classe Image,
-permette di NON memorizzare l'immagine all'interno del database
+Contiene la parola chiave NotMapped, permette di NON memorizzare l'immagine all'interno della
+tabella Images.
 ##	Microsoft.EntityFrameworkCore
-Per poter utilizzare la classe DbContext che permette la realizzazione di un
-database applicando il concetto di code first approach
+Contiene la classe DbContext, permette la realizzazione di un
+database applicando il concetto di code first approach.
+##	Microsoft.EntityFrameworkCore.SqlServer
+Contiene il servisio AddDbContext
 		
