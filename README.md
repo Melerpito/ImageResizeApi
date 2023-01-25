@@ -1,10 +1,10 @@
-## API Endpoints
-# UploadImage()
-# ListImage()
-# DeleteImage()
-# ResizeImage()
+# API Endpoints
+## UploadImage()
+## ListImage()
+## DeleteImage()
+## ResizeImage()
 
-## Piccola spiegazione dell'architettura del progetto
+# Piccola spiegazione dell'architettura del progetto
 Per poter impelementare una HTTP API per poter garantire a chiunque
 	di caricare/eliminare/modificare immagini è necessario avere:
 	
@@ -12,7 +12,7 @@ Per poter impelementare una HTTP API per poter garantire a chiunque
 		Descrizione: Contiene i metadata relativi a una immagine
 		Attributi:
 			- Id: 		Chiave identificativa dell'immagine;
-			- Nome: 	Assegnato durante il caricamento,
+			- Name: 	Assegnato durante il caricamento,
 					Non possono sussistere nomi equivalenti*
 			- ImageURL: 	Contiene il path dell'immagine;
 			- Width:	Larghezza dell'immagine;
@@ -31,4 +31,9 @@ Per poter impelementare una HTTP API per poter garantire a chiunque
 		Contenitore delle immagini.
 		Non memorizzo le immagini all'interno del database per motivi
 			prestazionali.
+
+# Librearie Aggiunte
+##	System.ComponentModel.DataAnnotations.Schema;
+Per poter utilizzare la parola chiave NotMapped all'interno della classe Image,
+permette di NON memorizzare l'immagine all'interno del database
 		
