@@ -39,11 +39,14 @@ Per poter impelementare una HTTP API per poter garantire a chiunque
 
 # Librearie Aggiunte
 ##	System.ComponentModel.DataAnnotations.Schema;
-Contiene la parola chiave NotMapped, permette di NON memorizzare l'immagine all'interno della
-tabella Images.
+		Contiene la parola chiave NotMapped, permette di NON memorizzare 
+		l'immagine all'interno della
+		tabella Images.
 ##	Microsoft.EntityFrameworkCore
-Contiene la classe DbContext, permette la realizzazione di un
-database applicando il concetto di code first approach.
+		Contiene la classe DbContext, permette la realizzazione di un
+		database applicando il concetto di code first approach.
 ##	Microsoft.EntityFrameworkCore.SqlServer
-Contiene il servisio AddDbContext
-		
+		Contiene il servisio AddDbContext
+## 	System.ComponentModel.DataAnnotations
+		Contiene la parola chiave Required, i parametri con questa parola chiave 
+		non possono essere nulli

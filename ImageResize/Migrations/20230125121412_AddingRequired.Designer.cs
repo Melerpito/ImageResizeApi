@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ImageResize.Migrations
 {
     [DbContext(typeof(ImageResizeDbContext))]
-    [Migration("20230125105301_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230125121412_AddingRequired")]
+    partial class AddingRequired
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,6 +39,7 @@ namespace ImageResize.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Width")
