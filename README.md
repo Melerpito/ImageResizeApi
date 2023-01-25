@@ -31,4 +31,9 @@ Per poter impelementare una HTTP API per poter garantire a chiunque
 		Contenitore delle immagini.
 		Non memorizzo le immagini all'interno del database per motivi
 			prestazionali.
+
+# Librearie Aggiunte
+##	System.ComponentModel.DataAnnotations.Schema;
+Per poter utilizzare la parola chiave NotMapped all'interno della classe Image,
+permette di NON memorizzare l'immagine all'interno del database
 		
