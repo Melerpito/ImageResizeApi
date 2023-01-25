@@ -42,14 +42,20 @@ namespace ImageResize.Controllers
             //creo un path per la memorizzazione dell'immagine in wwwroot
             var newPath = Path.Combine("wwwroot", imageIn.Name + ".jpg");
 
-            //creo un nuovo file
-            var fileStream = new FileStream(newPath, FileMode.Create);
+            try
+            {
+                //creo un nuovo file
+                var fileStream = new FileStream(newPath, FileMode.Create);
+                //copio l'immagine nel nuovo file
+                imageIn.realFigure.CopyTo(fileStream);
 
-            //copio l'immagine nel nuovo file
-            imageIn.realFigure.CopyTo(fileStream);
-
-            //chiudo il file
-            fileStream.Close();
+                //chiudo il file
+                fileStream.Close();
+            }
+            catch 
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
 
             //memorizzo l'url dell'immagine senza wwwroot
             imageIn.ImageUrl = newPath.Remove(0, 8);
@@ -169,6 +175,5 @@ namespace ImageResize.Controllers
 
             return Ok("Immagine modificata correttamente");
         }
-
     }
 }

@@ -9,8 +9,6 @@ namespace ImageResize.Models
         [Required]
         public string? Name { get; set; }           //Nome assegnato all'immagine dall'utente
         public string? ImageUrl { get; set; }       //Path dell'immagine
-        public int Width { get; set; }              //Larghezza
-        public int Height { get; set; }             //Altezza
 
         [Required]
         [NotMapped]
