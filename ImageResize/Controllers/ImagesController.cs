@@ -47,8 +47,11 @@ namespace ImageResize.Controllers
             //copio l'immagine nel nuovo file
             imageIn.realFigure.CopyTo(fileStream);
 
+            //chiudo il file
+            fileStream.Close();
+
             //memorizzo l'url dell'immagine senza wwwroot
-            imageIn.ImageUrl = newPath.Remove(0, 7);
+            imageIn.ImageUrl = newPath.Remove(0, 8);
             
             //memorizzo l'immagine all'interno del database
             _dbContext.Figures.Add(imageIn);
@@ -100,14 +103,21 @@ namespace ImageResize.Controllers
                 return NotFound("Immagine non trovata");
 
             //elimino l'immagine contenuta in wwwroot
-            //var imagePath = Path.Combine("wwwroot", imageDb.ImageUrl); //non funziona per qualche motivo
-            var imagePath = "wwwroot/" + imageDb.ImageUrl;
+            var imagePath = Path.Combine("wwwroot", imageDb.ImageUrl);
+            //var imagePath = "wwwroot/" + imageDb.ImageUrl;
             if(!System.IO.File.Exists(imagePath))
                 NotFound("Immagine non trovata");
-            
-            System.IO.File.Delete(imagePath);
 
-            //Rimuoi i metadati relativi nel database
+            try
+            { 
+                System.IO.File.Delete(imagePath); 
+            }
+            catch 
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            //Rimuovo i metadati relativi dal database
             _dbContext.Figures.Remove(imageDb);
             _dbContext.SaveChanges();
 
