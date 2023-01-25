@@ -1,10 +1,10 @@
-##API Endpoints
-#UploadImage()
-#ListImage()
-#DeleteImage()
-#ResizeImage()
+## API Endpoints
+# UploadImage()
+# ListImage()
+# DeleteImage()
+# ResizeImage()
 
-##Piccola spiegazione dell'architettura del progetto
+## Piccola spiegazione dell'architettura del progetto
 Per poter impelementare una HTTP API per poter garantire a chiunque
 	di caricare/eliminare/modificare immagini è necessario avere:
 	
