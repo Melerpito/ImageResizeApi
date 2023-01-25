@@ -39,7 +39,7 @@ namespace ImageResize.Controllers
                 BadRequest("Nome gia' utilizzato");
             
             //creo un path per la memorizzazione dell'immagine in wwwroot
-            var newPath = Path.Combine("wwwroot", imageIn.Name);
+            var newPath = Path.Combine("wwwroot", imageIn.Name + ".jpg");
 
             //creo un nuovo file
             var fileStream = new FileStream(newPath, FileMode.Create);
@@ -88,7 +88,7 @@ namespace ImageResize.Controllers
         //          - NotFound():     Se l'immagine non e' stata trovata
         //          - Ok():           Se l'immagine e' stata eliminata
         [HttpDelete("{name}")]
-        public IActionResult DeleteImage([FromBody] string name)
+        public IActionResult DeleteImage(string name)
         {
             //controllo se e' stato inserito un nome
             if(name == null)
@@ -97,14 +97,17 @@ namespace ImageResize.Controllers
             //controllo se il nome esiste
             var imageDb = _dbContext.Figures.Where(u => u.Name == name).SingleOrDefault();
             if (imageDb == null || imageDb.ImageUrl == null)
-                NotFound("Immagine non trovata");
+                return NotFound("Immagine non trovata");
 
             //elimino l'immagine contenuta in wwwroot
-            var imagePath = Path.Combine("wwwroot", imageDb.ImageUrl);
-            if(System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
+            //var imagePath = Path.Combine("wwwroot", imageDb.ImageUrl); //non funziona per qualche motivo
+            var imagePath = "wwwroot/" + imageDb.ImageUrl;
+            if(!System.IO.File.Exists(imagePath))
+                NotFound("Immagine non trovata");
+            
+            System.IO.File.Delete(imagePath);
 
-            //Rimuoi i metadata memorizzati nel database
+            //Rimuoi i metadati relativi nel database
             _dbContext.Figures.Remove(imageDb);
             _dbContext.SaveChanges();
 

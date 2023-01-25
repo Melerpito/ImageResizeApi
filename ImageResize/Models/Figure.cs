@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ImageResize.Models
 {
-    public class Image
+    public class Figure
     {
         public int Id { get; set; }                 //Codice univoco rappresentante l'immagine
         [Required]
@@ -12,7 +12,7 @@ namespace ImageResize.Models
         public int Width { get; set; }              //Larghezza
         public int Height { get; set; }             //Altezza
 
-        //[Required]
+        [Required]
         [NotMapped]
         public IFormFile? realFigure { get; set; }   //Contiene l'immagine, non e' memorizzato nel database
     }

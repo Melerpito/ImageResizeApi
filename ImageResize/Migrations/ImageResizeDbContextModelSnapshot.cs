@@ -21,7 +21,7 @@ namespace ImageResize.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ImageResize.Models.Image", b =>
+            modelBuilder.Entity("ImageResize.Models.Figure", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,7 +44,7 @@ namespace ImageResize.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Images");
+                    b.ToTable("Figures");
                 });
 #pragma warning restore 612, 618
         }

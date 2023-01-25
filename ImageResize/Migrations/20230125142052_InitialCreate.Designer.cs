@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ImageResize.Migrations
 {
     [DbContext(typeof(ImageResizeDbContext))]
-    [Migration("20230125121412_AddingRequired")]
-    partial class AddingRequired
+    [Migration("20230125142052_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace ImageResize.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ImageResize.Models.Image", b =>
+            modelBuilder.Entity("ImageResize.Models.Figure", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace ImageResize.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Images");
+                    b.ToTable("Figures");
                 });
 #pragma warning restore 612, 618
         }
