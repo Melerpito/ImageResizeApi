@@ -18,7 +18,7 @@ Descrizione: Contiene i metadata relativi a una immagine
 ##### Id: 		
 Chiave identificativa dell'immagine;
 ##### Name: 		
-Assegnato durante il caricamento, non possono sussistere nomi equivalenti*
+Assegnato durante il caricamento, non possono sussistere nomi equivalenti
 ##### ImageURL: 	
 Contiene il path dell'immagine;
 ##### Width:		
@@ -26,7 +26,7 @@ Larghezza dell'immagine;
 ##### Height:	
 Altezza dell'immagine.
 
-######*Se possono sussistere piu' nomi equivalenti:
+###### Se possono sussistere piu' nomi equivalenti:
 1) Non sarebbe possibile determinare quale immagine restituire al momento della ricerca;
 2) Potrei implementare un attributo NomeReale contenente un nome univoco per l'immagine ma sarebbe necessario implementare un sistema per la gestione degli utenti.
 
@@ -46,3 +46,5 @@ Contiene la classe DbContext, permette la realizzazione di un database applicand
 Contiene il servisio AddDbContext
 ## System.ComponentModel.DataAnnotations
 Contiene la parola chiave Required, i parametri con questa parola chiave non possono essere nulli
+## Magick.NET-Q16-AnyCPU
+Contiene i metodi per la modifica delle immagini

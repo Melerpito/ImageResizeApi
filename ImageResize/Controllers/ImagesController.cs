@@ -1,8 +1,9 @@
-﻿using ImageResize.Data;
+﻿using ImageMagick;
+using ImageResize.Data;
 using ImageResize.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static System.Net.Mime.MediaTypeNames;
+using System.Diagnostics.Metrics;
 
 namespace ImageResize.Controllers
 {
@@ -124,10 +125,49 @@ namespace ImageResize.Controllers
             return Ok("Immagine rimossa correttamente");
         }
 
-        [HttpPut("{id}")]
-        public IActionResult ResizeImage([FromBody] string name, int width, int heigth)
+        //summary: Permette la modifica della dimensione di una specifica immagine
+        //params:
+        //          - name:     Nome dell'immagine che si vuole modificare
+        //          - width:    Rappresenta la nuova larghezza dell'immagine
+        //          - height:   Rappresenta la nuova altezza dell'immagine
+        //returns:
+        //      BadRequest():   se name == null o width < 1 o height < 1
+        //      NoFound():      se l'immagine non e' stata trovata
+        //      Ok():           se l'immagine e' stata modificata con successo
+        [HttpPut("{name}")]
+        public IActionResult ResizeImage(string name, int width, int height)
         {
-            return Ok();
+            //controllo dei parametri di ingresso
+            if (name == null || width < 1 || height < 1)
+                return BadRequest("Parametri non sono inseriti corretamente");
+
+            //verifico l'esistenza dell'immagine
+            var imageDb = _dbContext.Figures.Where(u => u.Name == name).SingleOrDefault();
+            if (imageDb == null || imageDb.Name == null) 
+                return NotFound("Immagine non trovata");
+
+            var imagePath = Path.Combine("wwwroot", imageDb.Name + ".jpg");
+
+            //Ottengo il nome completo del file
+            var f = new FileInfo(imagePath);
+            var fullName = f.FullName;
+
+            // Source: https://github.com/dlemstra/Magick.NET/blob/main/docs/ResizeImage.md
+            // Read from file
+            using (var image = new MagickImage(fullName))
+            {
+                var size = new MagickGeometry(100, 100);
+                // This will resize the image to a fixed size without maintaining the aspect ratio.
+                // Normally an image will be resized to fit inside the specified size.
+                size.IgnoreAspectRatio = true;
+
+                image.Resize(size);
+
+                // Save the result
+                image.Write(fullName);
+            }
+
+            return Ok("Immagine modificata correttamente");
         }
 
     }
