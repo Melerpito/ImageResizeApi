@@ -11,6 +11,10 @@ Per poter realizzare una queue-base workers, prendo ispirazione da questa guida:
 
 https://blog.elmah.io/async-processing-of-long-running-tasks-in-asp-net-core/
 	
+Non riesco ad applicare questa guida, la porizione di codice che viene inserita all'interno di QueueBackgrounWorkItem non funziona per qualche motivo. 
+
+Per il momento provo a realizzare la api almeno asincrona
+
 ### Tabella Figures:
 
 Descrizione: Contiene i metadata relativi a una immagine
