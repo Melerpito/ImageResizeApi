@@ -39,7 +39,7 @@ namespace ImageResize.Controllers
                 //verifico se il nome e' stato gia' utilizzato
                 var imageDb = _dbContext.Figures.Where(u => u.Name == imageIn.Name).SingleOrDefault();
                 if(imageDb != null)
-                    BadRequest("Nome gia' utilizzato");
+                    return BadRequest("Nome gia' utilizzato");
             
                 //creo un path per la memorizzazione dell'immagine in wwwroot
                 var newPath = Path.Combine("wwwroot", imageIn.Name + ".jpg");

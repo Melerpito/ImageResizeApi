@@ -6,7 +6,10 @@ https://documenter.getpostman.com/view/25136747/2s8ZDd1LKw#intro
 
 Per poter garantire a chiunque di caricare/eliminare/modificare immagini è necessario avere una tabella contenente qualche metadata riguardo l'immagine. Le immagini vere e proprie vengono salvate non all'interno del database ma nella cartella wwwroot per motivi prestazionali.
 
-Inizialmente forse e' meglio sviluppare l'applicazione in maniera sincrona per avere qualcosa di almeno funzionante, solo successivamente provero' a realizzare una "queue-base workers".
+Inizialmente forse e' meglio sviluppare l'applicazione in maniera sincrona per avere qualcosa di almeno funzionante, solo successivamente provero' a realizzare una queue-base workers.
+Per poter realizzare una queue-base workers, prendo ispirazione da questa guida: 
+
+https://blog.elmah.io/async-processing-of-long-running-tasks-in-asp-net-core/
 	
 ### Tabella Figures:
 
