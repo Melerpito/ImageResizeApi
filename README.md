@@ -1,24 +1,12 @@
 # API Endpoints
-## UploadImage()
 
-permette l'inserimento di una nuova immagine
-
-## ListImages()
-
-restituisce le immagini memorizzate
-
-## DeleteImage()
-
-elimina una specifica immagine
-
-## ResizeImage()
-
-modifica le dimensioni di una immagine
-
+https://documenter.getpostman.com/view/25136747/2s8ZDd1LKw#intro
 
 # Piccola spiegazione dell'architettura del progetto
 
-Per poter garantire a chiunque di caricare/eliminare/modificare immagini è necessario avere:
+Per poter garantire a chiunque di caricare/eliminare/modificare immagini è necessario avere una tabella contenente qualche metadata riguardo l'immagine. Le immagini vere e proprie vengono salvate non all'interno del database ma nella cartella wwwroot per motivi prestazionali.
+
+Inizialmente forse e' meglio sviluppare l'applicazione in maniera sincrona per avere qualcosa di almeno funzionante, solo successivamente provero' a realizzare una "queue-base workers".
 	
 ### Tabella Figures:
 
@@ -35,7 +23,6 @@ Descrizione: Contiene i metadata relativi a una immagine
 * Non sarebbe possibile determinare quale immagine restituire al momento della ricerca;
 * Potrei implementare un attributo NomeReale contenente un nome univoco per l'immagine ma sarebbe necessario implementare per la gestione degli utenti.
 
-		
 ###	Cartella wwwroot: 
 Contenitore delle immagini.
 Non memorizzo le immagini all'interno del database per motivi prestazionali.

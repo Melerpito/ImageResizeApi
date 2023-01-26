@@ -59,8 +59,9 @@ namespace ImageResize.Controllers
                 _dbContext.Figures.Add(imageIn);
                 _dbContext.SaveChanges();
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
@@ -91,8 +92,9 @@ namespace ImageResize.Controllers
 
                 return Ok(imagesList);
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
