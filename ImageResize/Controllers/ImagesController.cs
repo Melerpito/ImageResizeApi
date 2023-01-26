@@ -124,7 +124,7 @@ namespace ImageResize.Controllers
                 var imagePath = Path.Combine("wwwroot", imageDb.ImageUrl);
                 //var imagePath = "wwwroot/" + imageDb.ImageUrl;
                 if (!System.IO.File.Exists(imagePath))
-                    NotFound("Immagine non trovata");
+                    return NotFound("Immagine non trovata");
 
                 System.IO.File.Delete(imagePath);
 
