@@ -2,19 +2,18 @@
 
 https://documenter.getpostman.com/view/25136747/2s8ZDd1LKw#intro
 
-# Piccola spiegazione dell'architettura del progetto
+# Piccola spiegazione sull'architettura del progetto
 
-Per poter garantire a chiunque di caricare/eliminare/modificare immagini è necessario avere una tabella contenente qualche metadata riguardo l'immagine. Le immagini vere e proprie vengono salvate non all'interno del database ma nella cartella wwwroot per motivi prestazionali.
+Per poter garantire a chiunque di caricare/eliminare/modificare immagini è necessario avere una tabella contenente qualche metadato riguardo l'immagine. Le immagini vere e proprie vengono salvate non all'interno del database ma nella cartella wwwroot per motivi prestazionali. 
+Scelgo di implementare un database sql, non e' particolarmente veloce ma e' un modo semplice per mantenere le informazioni relative le immagini anche dopo il riavvio.
 
-Inizialmente forse e' meglio sviluppare l'applicazione in maniera sincrona per avere qualcosa di almeno funzionante, solo successivamente provero' a realizzare una queue-base workers.
-Per poter realizzare una queue-base workers, prendo ispirazione da questa guida: 
-
+Inizialmente ho sviluppato l'applicazione in maniera sincrona per avere qualcosa di almeno funzionante, solo successivamente ho provato ad implementare una queue-base workers.
+Dato che non ho esperienza a riguardo, ho preso ispirazione dalla seguente guida:
 https://blog.elmah.io/async-processing-of-long-running-tasks-in-asp-net-core/
-	
-Non riesco ad applicare questa guida, la porizione di codice che viene inserita all'interno di QueueBackgrounWorkItem non funziona per qualche motivo. 
 
-Per il momento provo a realizzare la api almeno asincrona, la api sembra funzionare
+Non sono purtroppo riuscito ad applicarla, ho notato che il codice che inserirsco all'interno di QueueBackgrounWorkItem non funziona per qualche motivo. Comunque lascio il branch aperto.
 
+Ho realizzato infine un branch equivalente al master(sincrono) ma asincrono, sembra funzionara ma penso che possa presentare problemi nel caso in cui piu' client vadano ad interagire con lo stesso file.
 
 ### Tabella Figures:
 
@@ -28,10 +27,10 @@ Descrizione: Contiene i metadata relativi a una immagine
 
 *Se possono sussistere piu' nomi equivalenti*:
 
-* Non sarebbe possibile determinare quale immagine restituire al momento della ricerca;
-* Potrei implementare un attributo NomeReale contenente un nome univoco per l'immagine ma sarebbe necessario implementare per la gestione degli utenti.
+1) Non sarebbe possibile determinare quale immagine restituire al momento della ricerca;
+2) Potrei implementare un attributo NomeReale contenente un nome univoco per l'immagine ma sarebbe necessario implementare per la gestione degli utenti.
 
-###	Cartella wwwroot: 
+### Cartella wwwroot: 
 Contenitore delle immagini.
 Non memorizzo le immagini all'interno del database per motivi prestazionali.
 
