@@ -3,6 +3,7 @@ using ImageResize.Data;
 using ImageResize.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using System.Diagnostics.Metrics;
 
 namespace ImageResize.Controllers
@@ -44,11 +45,12 @@ namespace ImageResize.Controllers
                 //creo un path per la memorizzazione dell'immagine in wwwroot
                 var newPath = Path.Combine("wwwroot", imageIn.Name + ".jpg");
 
-
                 //creo un nuovo file
                 var fileStream = new FileStream(newPath, FileMode.Create);
+
                 //copio l'immagine nel nuovo file
                 imageIn.realFigure.CopyTo(fileStream);
+
                 //chiudo il file
                 fileStream.Close();
 
@@ -69,28 +71,40 @@ namespace ImageResize.Controllers
         }
 
         //summary:  restituisce i nomi delle immagini memorizzate
-        //              in ordine alfabetico
+        //              in ordine alfabetico crescente utilizzando
+        //              il paging.
+        //params:
+        //          - pageSize:         indica il numero di record per pagina
+        //          - pageNumber:       indica il numero di pagine
         //returns:
-        //          - NotFound() se non esistono immagini;
-        //          - Ok(imagesList) altrimenti.
+        //          - NotFound():       se non esistono immagini;
+        //          - Ok(imagesList):   altrimenti.
         [HttpGet]
-        public IActionResult ListImages()
+        public IActionResult ListImages(int? pageSize, int? pageNumber)
         {
+            //valori di default
+            pageSize ??= 5;
+            pageNumber ??= 10;
+
             try 
             { 
                 //crea la lista delle immagini da restituire
                 var imagesList =
                 (
                     from images in _dbContext.Figures
-                    orderby images.Name
-                    select images.Name
+                    select new { Name = images.Name }
                 );
 
                 //controllo se esistono immagini
                 if(imagesList == null)
                     return NotFound("Nessuna immagine");
 
-                return Ok(imagesList);
+                return Ok(
+                    imagesList
+                        .Skip((int)pageNumber * (int)pageSize - 1)
+                        .Take((int)pageSize)
+                        .OrderBy(u => u.Name)
+                    );
             }
             catch (Exception ex)
             {
@@ -122,6 +136,7 @@ namespace ImageResize.Controllers
 
                 //elimino l'immagine contenuta in wwwroot
                 var imagePath = Path.Combine("wwwroot", imageDb.ImageUrl);
+
                 //var imagePath = "wwwroot/" + imageDb.ImageUrl;
                 if (!System.IO.File.Exists(imagePath))
                     return NotFound("Immagine non trovata");
@@ -151,8 +166,10 @@ namespace ImageResize.Controllers
         //          - NoFound():      se l'immagine non e' stata trovata
         //          - Ok():           se l'immagine e' stata modificata con successo
         [HttpPut("{name}")]
-        public IActionResult ResizeImage(string name, int width, int height)
+        public IActionResult ResizeImage(string name, int width, int height, bool? ignoreAspectRatio)
         {
+            ignoreAspectRatio ??= true;
+
             //controllo dei parametri di ingresso
             if (name == null || width < 1 || height < 1)
                 return BadRequest("Parametri non sono inseriti corretamente");
@@ -176,7 +193,7 @@ namespace ImageResize.Controllers
                     var size = new MagickGeometry(100, 100);
                     // This will resize the image to a fixed size without maintaining the aspect ratio.
                     // Normally an image will be resized to fit inside the specified size.
-                    size.IgnoreAspectRatio = true;
+                    size.IgnoreAspectRatio = (bool)ignoreAspectRatio;
 
                     image.Resize(size);
 
