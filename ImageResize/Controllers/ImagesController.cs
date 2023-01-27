@@ -86,6 +86,9 @@ namespace ImageResize.Controllers
             pageSize ??= 5;
             pageNumber ??= 10;
 
+            if(pageSize <= 0 || pageNumber <= 0)
+                return BadRequest("pageSize e pageNumber devono essere valori positivi");
+
             try 
             { 
                 //crea la lista delle immagini da restituire

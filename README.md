@@ -13,7 +13,8 @@ https://blog.elmah.io/async-processing-of-long-running-tasks-in-asp-net-core/
 	
 Non riesco ad applicare questa guida, la porizione di codice che viene inserita all'interno di QueueBackgrounWorkItem non funziona per qualche motivo. 
 
-Per il momento provo a realizzare la api almeno asincrona
+Per il momento provo a realizzare la api almeno asincrona, la api sembra funzionare
+
 
 ### Tabella Figures:
 
